@@ -53,12 +53,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'COOPFACE.urls'
 
-MYPAGE = os.path.join(BASE_DIR,"landingPage/public/views")
+LANDINGPAGE = os.path.join(BASE_DIR,"landingPage/public/views")
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [MYPAGE],
+        'DIRS': [LANDINGPAGE],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

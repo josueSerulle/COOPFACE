@@ -193,7 +193,7 @@ body {
 }
 
 .section-heading h2 span {
-  color: #ff695f;
+  color: #269747;
   font-weight: 700;
   opacity: 1;
   text-transform: capitalize;
@@ -203,7 +203,7 @@ body {
   font-size: 30px;
   text-transform: uppercase;
   font-weight: 700;
-  color: #ff695f;
+  color: #269747;
   opacity: 0.15;
 }
 
@@ -233,7 +233,7 @@ body {
 }
 
 .main-blue-button-hover a:hover {
-  background-color: #ff695f;
+  background-color: #269747;
 }
 
 .main-red-button a {
@@ -250,7 +250,7 @@ body {
 
 .main-red-button-hover a {
   display: inline-block;
-  background-color: #ff695f;
+  background-color: #269747;
   font-size: 15px;
   font-weight: 400;
   color: #fff;
@@ -327,12 +327,12 @@ header
 
 .header-area .main-nav .logo {
   line-height: 100px;
-  color: #fff;
+  color: #201f1f;
   font-size: 28px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  float: left;
+  /* float: left; */
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -409,12 +409,12 @@ header
 
 .header-area .main-nav .nav li:hover a,
 .header-area .main-nav .nav li a.active {
-  color: #ff685f!important;
+  color: #269747 !important;
 }
 
 .background-header .main-nav .nav li:hover a,
 .background-header .main-nav .nav li a.active {
-  color: #ff685f!important;
+  color: #269747 !important;
   opacity: 1;
 }
 
@@ -619,6 +619,17 @@ header
   color: #ff685f;
 }
 
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.logo .img-logo {
+  width: 6%;
+}
+
 @media (max-width: 1200px) {
   .header-area .main-nav .nav li {
     padding-left: 12px;
@@ -630,10 +641,10 @@ header
 }
 
 @media (max-width: 992px) {
-  .header-area .main-nav .nav li:last-child  ,
+  /* .header-area .main-nav .nav li:last-child  ,
   .background-header .main-nav .nav li:last-child {
-    display: none;
-  }
+    display: block;
+  } */
   .header-area .main-nav .nav li:nth-child(6),
   .background-header .main-nav .nav li:nth-child(6) {
     padding-right: 0px;
@@ -824,7 +835,7 @@ preloader
     height: 16px;
     top: 12px;
     left: 15px;
-    background: #ff695f;
+    background: #269747;
     border-radius: 50%;
     -webkit-transform: translateX(0);
     transform: translateX(0);
@@ -847,7 +858,7 @@ preloader
     width: 16px;
     height: 16px;
     margin-left: 16px;
-    background: #ff695f;
+    background: #269747;
     border-radius: 50%;
 }
 
@@ -870,7 +881,7 @@ Banner Style
 
 .main-banner:after {
   content: '';
-  background-image: url(../images/baner-dec-left.png);
+  /* background-image: url(../images/baner-dec-left.png); */
   background-repeat: no-repeat;
   position: absolute;
   left: 0;
@@ -898,7 +909,7 @@ Banner Style
 .main-banner .item h6 {
   text-transform: uppercase;
   font-size: 18px;
-  color: #ff695f;
+  color: #269747;
   margin-bottom: 15px;
 }
 
@@ -915,7 +926,7 @@ Banner Style
 }
 
 .main-banner .item h2 span {
-  color: #ff695f;
+  color: #269747;
 }
 
 .main-banner .item p {
@@ -934,14 +945,14 @@ Banner Style
   text-align: center;
   line-height: 46px;
   border-radius: 50%;
-  background: rgb(255,104,95);
-  background: linear-gradient(105deg, rgba(255,104,95,1) 0%, rgba(255,144,104,1) 100%);
+  background: #269747;
+  background: linear-gradient(105deg, #269747 0%, #269747 100%);
   color: #fff;
   font-size: 20px;
 }
 
 .main-banner .item .down-buttons .call-button a {
-  color: #ff695f;
+  color: #269747;
   font-size: 15px;
   font-weight: 500;
   margin-left: 30px;
@@ -967,8 +978,8 @@ Banner Style
 }
 
 .main-banner .active:before {
-  color: #ff685f;
-  border-bottom: 3px solid #ff685f;
+  color: #269747;
+  border-bottom: 3px solid #269747;
 }
 
 
@@ -1052,7 +1063,7 @@ Services Style
 .our-services .owl-dots .owl-dot {
   width: 6px;
   height: 6px;
-  background-color: #ff695f;
+  background-color: #269747;
   border-radius: 50%;
   opacity: 0.3;
   margin: 0px 5px;
@@ -1106,7 +1117,7 @@ About
 
 .about-us .fact-item .count-title {
   font-size: 15px;
-  color: #ff695f;
+  color: #269747;
 }
 
 .about-us .fact-item p {
@@ -1168,7 +1179,7 @@ Portfolio
 
 .our-portfolio .item .hover-effect {
   position: absolute;
-  background-image: url(../images/hover-bg.png);
+  background-image: url(../images/hover-bg-green.png);
   background-repeat: no-repeat;
   background-size: cover;
   transition: all .5s;
@@ -1188,13 +1199,13 @@ Portfolio
 .our-portfolio .item .hover-effect .inner-content h4 {
   font-size: 20px;
   font-weight: 700;
-  color: #fff;
+  color: rgb(2, 48, 22);
   margin-bottom: 15px;
 }
 
 .our-portfolio .item .hover-effect .inner-content span {
   font-size: 15px;
-  color: #fff;
+  color: rgb(14, 13, 13);
 }
 
 .our-portfolio .item .thumb img {
@@ -1229,7 +1240,7 @@ Portfolio
 .owl-portfolio .owl-nav .owl-prev span:after {
   width: 46px;
   height: 46px;
-  background-color: #ff695f;
+  background-color: #269747;
   display: inline-block;
   text-align: center;
   line-height: 46px;
@@ -1253,7 +1264,7 @@ Portfolio
 .owl-portfolio .owl-nav .owl-next span:after {
   width: 46px;
   height: 46px;
-  background-color: #ff695f;
+  background-color: #269747;
   display: inline-block;
   text-align: center;
   line-height: 46px;
@@ -1273,7 +1284,7 @@ Portfolio
 .owl-portfolio .owl-dots .owl-dot {
   width: 6px;
   height: 6px;
-  background-color: #ff695f;
+  background-color: #269747;
   border-radius: 50%;
   opacity: 0.3;
   margin: 0px 5px;
@@ -1586,8 +1597,8 @@ Video
 }
 
 .our-videos .nacc .thumb .overlay-effect {
-  background: rgb(255,104,95);
-  background: linear-gradient(105deg, rgba(255,104,95,1) 0%, rgba(255,144,104,1) 100%);
+  background: #269747;
+  background: linear-gradient(105deg, #269747 0%, #269747 100%);
   display: inline-block;
   position: absolute;
   left: 0;
@@ -1616,8 +1627,8 @@ Video
 }
 
 .our-videos .menu .thumb .inner-content {
-  background: rgb(255,104,95);
-  background: linear-gradient(105deg, rgba(255,104,95,1) 0%, rgba(255,144,104,1) 100%);
+  background: #269747;
+  background: linear-gradient(105deg, #269747 0%, rgba#269747 100%);
   border-top-left-radius: 23px;
   border-bottom-right-radius: 23px;
   position: absolute;
@@ -1705,8 +1716,8 @@ contact
   display: inline-block;
   text-align: center;
   line-height: 46px;
-  background: rgb(255,104,95);
-  background: linear-gradient(105deg, rgba(255,104,95,1) 0%, rgba(255,144,104,1) 100%);
+  background: #269747;
+  background: linear-gradient(105deg, #269747 0%, #269747 100%);
   border-radius: 50%;
   color: #fff;
   font-size: 22px;
@@ -1715,7 +1726,7 @@ contact
 }
 
 .contact-us .info span a {
-  color: #ff685f;
+  color: #269747;
   font-size: 14px;
   font-weight: 400;
   line-height: 25px;
@@ -1726,7 +1737,7 @@ form#contact {
   margin-left: -100px;
   position: relative;
   z-index: 2;
-  background-image: url(../images/contact-form-bg.png);
+  background-color: white;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1758,7 +1769,7 @@ form#contact input::placeholder {
 
 form#contact button {
   display: inline-block;
-  background-color: #ff695f;
+  background-color: #269747;
   font-size: 15px;
   font-weight: 400;
   color: #fff;
@@ -1802,7 +1813,7 @@ footer .footer-item h4 {
 
 footer .about .logo img {
   width: 89px;
-  margin-bottom: 30px;
+  margin-bottom: 8px;
 }
 
 footer .about a {
@@ -1832,7 +1843,7 @@ footer .about ul li a {
 }
 
 footer .about ul li a:hover {
-  background-color: #ff695f;
+  background-color: #269747;
 }
 
 footer .footer-item ul li {
@@ -1851,7 +1862,7 @@ footer .footer-item ul li a {
 }
 
 footer .footer-item ul li a:hover {
-  color: #ff695f;
+  color: #269747;
 }
 
 footer .footer-item p {
@@ -1901,7 +1912,7 @@ footer .copyright p {
 }
 
 footer .copyright p a {
-  color: #ff695f;
+  color: #269747;
 }
 
 /* 
