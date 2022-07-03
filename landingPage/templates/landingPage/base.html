@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+      <title>COOPFACE</title>
+
+      <!-- Bootstrap core CSS -->
+      <link href="{% static 'landingPage/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+      <!-- Additional CSS Files -->
+      <link rel="stylesheet" href="{% static 'landingPage/css/templatemo-onix-digital.css' %}">
+      <link rel="stylesheet" href="{% static 'landingPage/css/animated.css' %}">
+      <link rel="stylesheet" href="{% static 'landingPage/css/owl.css' %}">
+      <link rel="stylesheet" href="{% static 'landingPage/css/fontawesome.css' %}">
+  </head>
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Header Area Start ***** -->
+    {%include "landingPage/include/header.html"%}
+    <!-- ***** Header Area End ***** -->
+    <!-- ***** Main Bare Area Start ***** -->
+    {%include "landingPage/include/mainBaner.html"%}
+    <!-- ***** Main Bare Area End ***** -->
+    <!-- ***** Service Area Start ***** -->
+    {%include "landingPage/include/service.html"%}
+    <!-- ***** Service Area End ***** -->
+    <!-- ***** about Area Start ***** -->
+    {%include "landingPage/include/about.html"%}
+    <!-- ***** about Area End ***** -->
+    <!-- ***** portfolio Area Start ***** -->
+    {%include "landingPage/include/portfolio.html"%}
+    <!-- ***** portfolio Area End ***** -->
+    <!-- ***** contact Area Start ***** -->
+    {%include "landingPage/include/contact.html"%}
+    <!-- ***** contact Area End ***** -->
+    <div class="footer-dec">
+      <img src="{% static 'landingPage/images/footer-dec.png' %}" alt="">
+    </div>
+    <!-- ***** footer Area Start ***** -->
+    {%include "landingPage/include/footer.html"%}
+    <!-- ***** footer Area End ***** -->
+  
+    <!-- Scripts -->
+    <script src="{% static 'landingPage/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'landingPage/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'landingPage/js/owl-carousel.js' %}"></script>
+    <script src="{% static 'landingPage/js/animation.js' %}"></script>
+    <script src="{% static 'landingPage/js/imagesloaded.js' %}"></script>
+    <script src="{% static 'landingPage/js/custom.js' %}"></script>
+      
+        <script>
+        // Acc
+          $(document).on("click", ".naccs .menu div", function() {
+            var numberIndex = $(this).index();
+      
+            if (!$(this).is("active")) {
+                $(".naccs .menu div").removeClass("active");
+                $(".naccs ul li").removeClass("active");
+      
+                $(this).addClass("active");
+                $(".naccs ul").find("li:eq(" + numberIndex + ")").addClass("active");
+      
+                var listItemHeight = $(".naccs ul")
+                  .find("li:eq(" + numberIndex + ")")
+                  .innerHeight();
+                $(".naccs ul").height(listItemHeight + "px");
+              }
+          });
+        </script>
+      </body>
+</html>

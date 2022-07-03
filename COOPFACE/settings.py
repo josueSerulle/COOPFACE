@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'landingPage'
+    'landingPage',
+    'coopVirtual'
 ]
 
 MIDDLEWARE = [
@@ -53,12 +54,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'COOPFACE.urls'
 
-LANDINGPAGE = os.path.join(BASE_DIR,"landingPage/public/views")
+LANDINGPAGE = os.path.join(BASE_DIR,"landingPage/templates")
+COOPVIRUTAL = os.path.join(BASE_DIR,"coopVirtual/templates")
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [LANDINGPAGE],
+        'DIRS': [LANDINGPAGE, COOPVIRUTAL],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,8 +81,12 @@ WSGI_APPLICATION = 'COOPFACE.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': 'coopface',
+    'USER':'root',
+    'PASSWORD':'',
+    'HOST':'localhost',
+    'PORT':'',
     }
 }
 
@@ -118,6 +124,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,"landingPage/static"),
+    os.path.join(BASE_DIR,"coopVirtual/static"),
+]
 
 STATIC_URL = 'static/'
 
