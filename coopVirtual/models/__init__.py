@@ -2,7 +2,6 @@ from .PersonTypeModel           import PersonTypeModel
 from .PersonModel               import PersonModel
 from .PersonJobModel            import PersonJobModel
 from .PersonAddressModel        import PersonAddressModel
-from .PartnerModel              import PartnerModel
 from .UsersModel                import UsersModel
 from .SavingTypeModel           import SavingTypeModel
 from .SavingTransactionModel    import SavingTransactionModel

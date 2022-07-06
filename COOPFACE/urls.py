@@ -18,5 +18,5 @@ from django.urls import path,include
 
 urlpatterns = [
     path('', include('landingPage.urls')),
-    path('coop_virtual', include('coopVirtual.urls'), name='coop_virtual'),
+    path('coop_virtual/', include('coopVirtual.urls'), name='coop_virtual'),
 ]
