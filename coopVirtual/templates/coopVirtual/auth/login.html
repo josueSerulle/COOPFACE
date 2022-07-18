@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>AdminLTE 3 | Log in</title>
-
+        <title>COOPFACE</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'coopVirtual/assets/img/favicon.ico' %}">
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
         <!-- Font Awesome -->
@@ -26,15 +26,16 @@
             <!-- login-card-body -->
             <div class="card">
                 <div class="card-body login-card-body">
-                    <div class="alert alert-danger d-none text-center" role="alert"></div>
-                    <p class="login-box-msg">Sign in to start your session</p>
-                    <form id="login-form" action="{% url "login_post" %}" method="post">
+                    {% if error %}
+                        <div class="alert alert-danger text-center" role="alert">{{ error }}</div>
+                    {% endif %}
+                    <form id="login-form" action="{% url "login" %}" method="post">
                         {% csrf_token %}
                         <div class="input-group mb-3">
                             <input type="text" name="username" class="form-control" placeholder="codigo" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-fa-user"></span>
+                                    <span class="fas fa-user"></span>
                                 </div>
                             </div>
                         </div>
@@ -48,7 +49,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="button" class="btn btn-primary btn-block" id="btn-login">Acceder</button>
+                                <button type="submit" class="btn btn-primary btn-block" id="btn-login">Acceder</button>
                             </div>
                         </div> 
                     </form>

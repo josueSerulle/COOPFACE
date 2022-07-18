@@ -140,6 +140,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Autenticate setting
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    ''
+    'coopVirtual.backends.AuthBackend'
 ]
 AUTH_USER_MODEL    = 'coopVirtual.UsersModel' 
+
+# Mail Setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jotamaster12@gmail.com'
+EMAIL_HOST_PASSWORD = 'hofbdfhnszhanhqs'
+
+#Message Setting
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

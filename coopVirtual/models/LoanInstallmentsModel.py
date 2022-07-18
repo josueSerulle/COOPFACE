@@ -5,7 +5,7 @@ from coopVirtual.models.LoanModel import LoanModel
 # Create your models here.
 
 class LoanInstallmentsModel(models.Model):
-    id_prestamo         = models.ForeignKey(LoanModel, on_delete = models.CASCADE)
+    id_prestamo         = models.ForeignKey(LoanModel, on_delete = models.CASCADE, null = True)
     fecha_expiracion    = models.DateField(null = True)
     no_cuota            = models.IntegerField(null = True)
     capital             = models.DecimalField(null = True, max_digits = 19, decimal_places = 2)

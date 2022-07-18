@@ -1,0 +1,59 @@
+{% extends "coopVirtual/base.html" %}
+{%block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Solicitud de Prestamos</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{% url "coop_virtual" %}">Inicio</a></li>
+                            <li class="breadcrumb-item active">Solicitud de prestamo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            {% if messages  %}
+                {% for message in messages %}
+                    <div class="alert alert-success text-center" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <a class="btn btn-success" style="font-size: .875rem; margin: -0.75rem 0; padding: 0.25rem 0.5rem;" href="{% url "loand_application_create" %}">Crear Solicitud <i class="fas fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="list" class="table table-bordered table-striped dataTable dtr-inline text-center">
+                        <thead>
+                            <tr>
+                                <th>Tipo de prestamo</th>
+                                <th>Fecha solicitud</th>
+                                <th>NO. Cuotas</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock  %}
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'coopVirtual/assets/js/loandApplication.js' %}"></script>
+{% endblock %}

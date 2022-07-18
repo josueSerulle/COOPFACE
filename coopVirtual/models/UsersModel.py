@@ -4,11 +4,12 @@ from coopVirtual.models.PersonModel import PersonModel
 from django import forms
 
 class UsersModel(AbstractBaseUser):
-    persona     = models.OneToOneField(PersonModel, on_delete = models.CASCADE)
-    is_partner  = models.BooleanField(default = False)
-    is_employee = models.BooleanField(default = False)
-    codigo      = models.CharField(null = True, max_length = 50, unique = True)
-    username    = models.CharField(null = True, max_length = 50, unique = True)
+    persona         = models.OneToOneField(PersonModel, on_delete = models.CASCADE, null = True)
+    is_partner      = models.BooleanField(default = False)
+    is_employee     = models.BooleanField(default = False)
+    codigo          = models.CharField(null = True, max_length = 50, unique = True)
+    username        = models.CharField(null = True, max_length = 50, unique = True)
+    fecha_registro  = models.DateField(null = True)
     
     USERNAME_FIELD = 'username'
 

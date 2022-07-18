@@ -1,10 +1,11 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from ..decorators import partner_required
 
 # Create your views here.
 
+@login_required(login_url='login')
+@partner_required
 def index(request):
-    template = "coopVirtual/auth/login.html"
-    if request.user.is_authenticated:
-        template = "coopVirtual/home.html"
-    
-    return render(request, template);
+    print(request.user.persona.imagen)
+    return render(request, "coopVirtual/home.html");
