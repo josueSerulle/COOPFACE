@@ -30,6 +30,7 @@ $(document).ready(function () {
                 sSortDescending : ": Activar para ordenar la columna de manera descendente"
             }
         },
+        order: [[1, 'asc']],
         columns: [
             {"data": 'tipoPrestamo',    "sClass": "dt-tipoPrestamo",    "defaultContent": "<i class='na'>-</i>"},
             {"data": 'fechaSolicitud',  "sClass": "dt-fechaSolicitud",  "defaultContent": "<i class='na'>-</i>"},
@@ -59,6 +60,38 @@ $(document).ready(function () {
     });
 
     $(document).on("change", "#tipo-prestamo, #monto, #cuotas", loadCalculate);
+
+    $(document).on("click", ".delete", function () { 
+        const id = $(this).data().id;
+
+        Swal.fire({
+            title: '¿Estas seguro?',
+            text: "Seguro de eliminar la solicitud",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, bórralo!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    method: "GET",
+                    url: `${getUrl()}loand_application/delete/${id}`,
+                    statusCode: {
+                        200: (response) => {
+                            Swal.fire('¡Eliminado!',response.msg,'success');
+                        },
+                        400: (response) => {
+                            Swal.fire('Advertencia',response.responseJSON.msg,'warning');
+                        }
+                    }
+                });
+
+                $('#list').DataTable().ajax.reload();
+            }
+        });
+    });
 
     $(function () {
         $('.form-validate').validate({
@@ -176,8 +209,8 @@ const statusButton = (data) => {
 };
 
 const actionLink = (data) => {
-    let html =`<div class="btn-group"><button class="btn btn-secondary btn-sm" data-id = "${data.id}"><i class="fas fa-file-alt"></i></button>`;
-
+    let html =`<div class="btn-group">`;
+    // <button class="btn btn-secondary btn-sm" data-id = "${data.id}"><i class="fas fa-file-alt"></i></button>
     if(parseInt(data.estado) === 1){
         html += `<button class="btn btn-danger btn-sm delete" data-id = "${data.id}"><i class="fa fa-times"></i></button>`;
     }

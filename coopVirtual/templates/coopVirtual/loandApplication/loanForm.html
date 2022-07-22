@@ -1,0 +1,418 @@
+{% extends "coopVirtual/base.html" %}
+{%block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Solicitud de prestamo</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{% url "coop_virtual" %}">Inicio</a></li>
+                            <li class="breadcrumb-item active">Solicitud de prestamo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-danger cancel" data-moduleName="loand_application" style="font-size: .875rem; margin: -0.75rem 0; padding: 0.25rem 0.5rem;">Salir</button>
+                    </div>
+                </div>
+                <form class="form-validate" action="{% url "loan_form_insert" loanApplicationId=loan.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {% if messages  %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger text-center" role="alert">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="bs-stepper">
+                            <div class="bs-stepper-header" role="tablist">
+                                <!-- your steps here -->
+                                <div class="step" data-target="#basic-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="basic-part" id="basic-part-trigger">
+                                        <span class="bs-stepper-circle">1</span>
+                                        <span class="bs-stepper-label">Informacion basica</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#family-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="family-part" id="family-part-trigger">
+                                        <span class="bs-stepper-circle">2</span>
+                                        <span class="bs-stepper-label">Garante y familiar</span>
+                                    </button>
+                                </div>
+                                <div class="line"></div>
+                                <div class="step" data-target="#review-part">
+                                    <button type="button" class="step-trigger" role="tab" aria-controls="review-part" id="review-part-trigger">
+                                        <span class="bs-stepper-circle">3</span>
+                                        <span class="bs-stepper-label">Revision</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bs-stepper-content">
+                                <!-- your steps content here -->
+                                <div id="basic-part" class="content" role="tabpanel" aria-labelledby="basic-part-trigger">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="codigo">codigo:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-user-lock"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="codigo" value="{{ user.codigo }}" disabled/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="cedula">cedula:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="Cedula" value="{{ user.persona.cedula }}" disabled/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre Completo:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="nombre" value="{{ user.persona.nombre }} {{ user.persona.apellidos }}" disabled/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="correo">Correo:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                    </div>
+                                                    <input type="email" class="form-control" id="correo" name="userCorreo" value="{{ person.correo }}" placeholder="ejemplo@coopface.com" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="celular">Celular:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-mobile"></i></span>
+                                                    </div>
+                                                    <input type="phone" class="form-control" id="celular" name="userCelular" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="{{person.celular}}" placeholder="(000) 000-0000" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="telefono">Telefono:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                    </div>
+                                                    <input type="phone" class="form-control" id="telefono" name="userTelefono" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="{{ person.telefono }}" placeholder="(000) 000-0000" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label for="direccion">Dirrecion:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-map"></i></span>
+                                                    </div>
+                                                    <input type="phone" class="form-control" id="direccion" name="userDireccion" value="{{address.descripcion}}" placeholder="" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="empresa">Empresa:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-building"></i></span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="empresa" name="userEmpresa" value="{{job.empresa}}" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="empTelefono">Telefono de la empresa:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                    </div>
+                                                    <input type="phone" class="form-control" id="emp-telefono" name="userEmpTelefono" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="{{job.telefono}}" placeholder="(000) 000-0000" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label for="sueldo">Sueldo:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text"><i class="fas fa-money-bill"></i></span>
+                                                    </div>
+                                                    <input type="phone" class="form-control currency" id="sueldo" name="userSueldo" value="{{job.sueldo}}" placeholder="" required/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary pull next">Continuar</button>
+                                </div>
+                                <div id="family-part" class="content" role="tabpanel" aria-labelledby="family-part-trigger">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Garante</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="cedula">cedula:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control cedula" name="cedula[]" id="cedula" data-inputmask='"mask": "999-9999999-9"' data-mask="" data-rule-cedula="true" inputmode="text" value="" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="nombre">Nombre:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="nombre[]" id="nombre" value="" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="apellido">Apellido:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="apellido[]" id="apellido" value="" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="correo">Correo:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                            </div>
+                                                            <input type="email" class="form-control" id="correo" name="correo[]" value="" placeholder="ejemplo@coopface.com" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="celular">Celular:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-mobile"></i></span>
+                                                            </div>
+                                                            <input type="phone" class="form-control" id="celular" name="celular[]" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="" placeholder="(000) 000-0000" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="telefono">Telefono:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                            </div>
+                                                            <input type="phone" class="form-control" id="telefono" name="telefono[]" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="" placeholder="(000) 000-0000" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">Familiar</h3>
+                                            <div class="card-tools">
+                                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="cedula">cedula:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control cedula" name="cedula[]" id="cedula" data-inputmask='"mask": "999-9999999-9"' data-mask="" inputmode="text" value="" data-rule-cedula="true" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="nombre">Nombre:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="nombre[]" id="nombre" value="" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label for="apellido">Apellido:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="apellido[]" id="apellido" value="" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="apellido">Parentesco:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-house-user"></i></span>
+                                                            </div>
+                                                            <input type="text" class="form-control" name="parentesco" id="Parentesco" value="" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="correo">Correo:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                                            </div>
+                                                            <input type="email" class="form-control" id="correo" name="correo[]" value="" placeholder="ejemplo@coopface.com" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="celular">Celular:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-mobile"></i></span>
+                                                            </div>
+                                                            <input type="phone" class="form-control" id="celular" name="celular[]" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="" placeholder="(000) 000-0000" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="telefono">Telefono:</label>
+                                                        <div class="input-group">
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                                            </div>
+                                                            <input type="phone" class="form-control" id="telefono" name="telefono[]" data-inputmask='"mask": "(999) 999-9999"' data-mask="" inputmode="text" value="" placeholder="(000) 000-0000" required/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                    <button type="button" class="btn btn-primary previous">Volver</button>
+                                    <button type="button" class="btn btn-primary next">Continuar</button>
+                                </div>
+                                <div id="review-part" class="content" role="tabpanel" aria-labelledby="review-part-trigger">
+                                    <input type="hidden" id="monto" value="{{loan.monto_solicitado}}" />
+                                    <input type="hidden" id="cuota" value="{{loan.cuotas}}" />
+                                    <input type="hidden" id="interes" value="{{loan.id_tipo_prestamo.interes_mensual}}" />
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <h4>Tipo de prestamo:</h4>
+                                            <div class="form-group">
+                                                <label for="prestamo">{{ loan.id_tipo_prestamo.descripcion }}</label>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <h4>Monto:</h4>
+                                            <div class="form-group">
+                                                {% load humanize %}
+                                                <label for="monto">$ {{ loan.monto_solicitado|floatformat:2|intcomma }}</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <h4>Cuotas:</h4>
+                                            <div class="form-group">
+                                                <label for="cuotas">{{ loan.cuotas }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="card card-success card-outline card-tabs">
+                                        <div class="card-body">
+                                            <table id="list" class="table table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No. Cuota</th>
+                                                        <th>Coutas Mensuales</th>
+                                                        <th>Interes</th>
+                                                        <th>Amortización</th>
+                                                        <th>Amortización acumulada</th>
+                                                        <th>Saldo insoluto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                    <button type="button" class="btn btn-primary previous">Volver</button>
+                                    <button type="submit" class="btn btn-success">Aprobar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer--> 
+                </form>
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock  %}
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'coopVirtual/assets/js/loanForm.js' %}"></script>
+{% endblock %}

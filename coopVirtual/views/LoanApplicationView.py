@@ -17,12 +17,12 @@ from coopVirtual.models.LoanApplicationModel import LoanApplicationForm, LoanApp
 
 # Create your views here.
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def indexView(request):
     return render(request, "coopVirtual/loandApplication/index.html")
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def  datatable(request):
     data            = []
@@ -40,14 +40,14 @@ def  datatable(request):
     
     return JsonResponse({"data": data}, safe = False)
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def createView(request):
     loanApplication = LoandApplicationBackEnd()
     
     return render(request, "coopVirtual/loandApplication/create.html", {"loandTypes": loanApplication.getAllLoandType()})
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def insertView(request):
     
@@ -57,6 +57,8 @@ def insertView(request):
             return loanGerencial(request)
         elif int(request.POST['tipo_prestamo']) == 2:
             return loanExpreso(request)
+        elif int(request.POST['tipo_prestamo']) == 3:
+            return loanNormal(request)
 
 def loanGerencial(request):
     loanApplication = LoandApplicationBackEnd()
@@ -93,8 +95,8 @@ def loanExpreso(request):
         locale.setlocale(locale.LC_ALL, 'en_US')
         savingNormalTotal   = savingTransaction.savingNormalTotal()
         monto               = float(formValidate.cleaned_data['monto'].replace("$","").replace(",",""))
-        print(savingNormalTotal)
-        if(monto > savingNormalTotal):
+        
+        if monto > savingNormalTotal:
             messages.error(request, "El monto seleccionado " + formValidate.cleaned_data['monto']  + " es mayor a su total de ahorro normal $ " + f'{round(savingNormalTotal, 2):,}')
             return redirect("loand_application_create")
         
@@ -112,9 +114,57 @@ def loanExpreso(request):
         sendMail(request)
         return redirect('loand_application')
         
-    
     messages.error(request, formValidate.errors)
     return redirect("loand_application_create")
+
+def loanNormal(request):
+    loanApplication     = LoandApplicationBackEnd()
+    user                = UserBackEnd()
+    savingTransaction   = SavingTransactionBackEnd()
+    formValidate        = LoanApplicationForm(request.POST)
+    
+    
+    if formValidate.is_valid():
+        locale.setlocale(locale.LC_ALL, 'en_US')
+        savingNormalTotal   = savingTransaction.savingNormalTotal()
+        monto               = float(formValidate.cleaned_data['monto'].replace("$","").replace(",",""))
+        
+        if monto < savingNormalTotal:
+            messages.error(request, "El monto seleccionado " + formValidate.cleaned_data['monto']  + " es menor a su total de ahorro normal $ " + f'{round(savingNormalTotal, 2):,}')
+            return redirect("loand_application_create")
+        elif monto > (savingNormalTotal * 3):
+            messages.error(request, "El monto seleccionado " + formValidate.cleaned_data['monto']  + " es mayor a su total de ahorro normal * 3 $ " + f'{round((savingNormalTotal *3), 2):,}')
+            return redirect("loand_application_create")
+        
+        loanApplicationModel = LoanApplicationModel()
+        
+        loanApplicationModel.id_socio            = user.getPerson(request.user.persona_id)
+        loanApplicationModel.id_tipo_prestamo    = loanApplication.getLoanType(formValidate.cleaned_data['tipo_prestamo'])
+        loanApplicationModel.fecha_solicitud     = datetime.now()
+        loanApplicationModel.monto_solicitado    = formValidate.cleaned_data['monto'].replace("$","").replace(",","")
+        loanApplicationModel.cuotas              = formValidate.cleaned_data['cuotas']
+        loanApplicationModel.estado              = 0
+        
+        loanApplicationModel.save()
+        
+        return redirect("loan_form", loanApplicationId=loanApplicationModel.id)
+        
+    messages.error(request, formValidate.errors)
+    return redirect("loand_application_create")
+
+@login_required(login_url='login_coop')
+@partner_required
+def deleteView(request, loanApplicationId):
+    loanApplicationBackend  = LoandApplicationBackEnd()
+    loanApplication         = loanApplicationBackend.getLoanApplication(loanApplicationId)
+    
+    if loanApplication.estado > 1:
+        return JsonResponse({"msg": "Esta solicitud ya esta siendo procesando, no se puede eliminar"}, safe = False, status = 400)
+    
+    loanApplication.estado = 0
+    loanApplication.save()
+    
+    return JsonResponse({"msg": "Solicitud Eliminada!!"}, safe = False)
 
 def sendMail(request):
     subject = 'Solicitud de préstamo Recibida'

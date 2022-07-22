@@ -11,3 +11,6 @@ class LoandApplicationBackEnd:
     
     def loandApplicationList(selft):
         return LoanApplicationModel.objects.exclude(estado = 0).select_related("id_tipo_prestamo")
+    
+    def getLoanApplication(self, id):
+        return LoanApplicationModel.objects.select_related("id_tipo_prestamo").get(id = id)

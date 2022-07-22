@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'landingPage',
     'coopVirtual'
 ]
@@ -56,11 +57,12 @@ ROOT_URLCONF = 'COOPFACE.urls'
 
 LANDINGPAGE = os.path.join(BASE_DIR,"landingPage/templates")
 COOPVIRUTAL = os.path.join(BASE_DIR,"coopVirtual/templates")
+ADMIN       = os.path.join(BASE_DIR,"admin/templates")
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [LANDINGPAGE, COOPVIRUTAL],
+        'DIRS': [LANDINGPAGE, COOPVIRUTAL,ADMIN],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,6 +130,7 @@ USE_TZ = True
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"landingPage/static"),
     os.path.join(BASE_DIR,"coopVirtual/static"),
+    os.path.join(BASE_DIR,"admin/static"),
 ]
 
 STATIC_URL = 'static/'
@@ -140,7 +143,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Autenticate setting
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'coopVirtual.backends.AuthBackend'
+    'coopVirtual.backends.AuthBackend',
+    'admin.backends.AuthBackend'
 ]
 AUTH_USER_MODEL    = 'coopVirtual.UsersModel' 
 

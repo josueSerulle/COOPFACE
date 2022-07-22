@@ -3,16 +3,21 @@ from coopVirtual.models.PersonJobModel import PersonJobModel
 from coopVirtual.models.PersonAddressModel import PersonAddressModel
 from django.core.exceptions import ObjectDoesNotExist
 
+from coopVirtual.models.UsersModel import UsersModel
+
 class UserBackEnd:
     
     def getPerson(self, personId):
         try:
-            person = PersonModel.objects.get(id=personId)
+            person = PersonModel.objects.select_related().get(id=personId)
         except ObjectDoesNotExist:
             person = None
         
         return person
-        
+    
+    def getUser(self, personId):
+        return UsersModel.objects.get(persona_id = personId)
+    
     def getJob(self, personId, isView = False):
         try:
             job = PersonJobModel.objects.get(id_persona_id=personId)
@@ -28,3 +33,19 @@ class UserBackEnd:
             address = None if isView else PersonAddressModel()
         
         return address
+    
+    def getPersonByCedula(self, cedula):
+        try:
+            person = PersonModel.objects.filter(cedula=cedula).values()
+        except ObjectDoesNotExist:
+            person = {}
+        
+        return person
+    
+    def getPersonByDocument(self, cedula):
+        try:
+            person = PersonModel.objects.get(cedula=cedula)
+        except ObjectDoesNotExist:
+            person = PersonModel()
+        
+        return person

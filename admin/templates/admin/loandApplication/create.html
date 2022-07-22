@@ -1,0 +1,107 @@
+{% extends "coopVirtual/base.html" %}
+{%block content %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Solicitud de prestamo</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{% url "coop_virtual" %}">Inicio</a></li>
+                            <li class="breadcrumb-item active">Solicitud de prestamo</li>
+                        </ol>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- Main content -->
+        <section class="content">
+            <!-- Default box -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-danger cancel" data-moduleName="loand_application" style="font-size: .875rem; margin: -0.75rem 0; padding: 0.25rem 0.5rem;">Salir</button>
+                    </div>
+                </div>
+                <form class="form-validate" action="{% url "loan_application_insert" %}" method="post">
+                    {% csrf_token %}
+                    <div class="card-body">
+                        {% if messages  %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger text-center" role="alert">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="prestamo">Tipo de prestamo:</label>
+                                    <select id="tipo-prestamo" name="tipo_prestamo" class="form-control select2" style="width: 100%;">
+                                        <option selected value="">Elegir un prestamo</option>
+                                        {% for loandType in loandTypes %}
+                                            <option value="{{ loandType.id }}" data-interes="{{ loandType.interes_mensual }}">{{ loandType.descripcion }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="monto">Monto:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control currency" id="monto" name="monto" value="" placeholder="00.00" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="cuotas">Coutas:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                        </div>
+                                        <input type="number" class="form-control" id="cuotas" name="cuotas" value="" placeholder="0" min="0" max="60"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  class="col-lg-12">
+                                <button type="submit" class="btn btn-success btn-block">Solicitar</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="card card-success card-outline card-tabs">
+                            <div class="card-body">
+                                <table id="list2" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No. Cuota</th>
+                                            <th>Coutas Mensuales</th>
+                                            <th>Interes</th>
+                                            <th>Amortización</th>
+                                            <th>Amortización acumulada</th>
+                                            <th>Saldo insoluto</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+                    <!-- /.card-footer--> 
+                </form>
+            </div>
+            <!-- /.card -->
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock  %}
+{% block scripts %}
+    {% load static %}
+    <script src="{% static 'coopVirtual/assets/js/loandApplication.js' %}"></script>
+{% endblock %}

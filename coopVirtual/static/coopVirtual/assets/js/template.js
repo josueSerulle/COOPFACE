@@ -1,4 +1,33 @@
 $(document).ready(function(){
+
+    $.validator.addMethod("cedula", function name(value, element) {
+        let contador = 1,
+            ultimoDIgito = 0,
+            suma = 0,
+            linea = "";
+        
+        //bulce de busqueda y multiplicar
+        value.split('').forEach(element => {
+            if(element != '-')
+            {
+                if(contador % 2 == 0)
+                    linea += (Number(element * 2));
+                else if(contador != 11)
+                    linea += element;
+                contador++;
+                if(contador == 12)
+                    ultimoDIgito = Number(element);
+            }
+        });
+    
+        //bucle de suma
+        linea.split('').forEach(element => {
+            suma += Number(element);
+        });
+    
+        return (suma + ultimoDIgito) % 10 == 0;
+    }, "Cedula invalida!");
+
     jQuery.extend(jQuery.validator.messages, {
         required: "Este campo es requerido",
         email   : "Por favor digitar una direccion de correo valido.",

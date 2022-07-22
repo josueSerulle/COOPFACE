@@ -18,5 +18,6 @@ from django.urls import path,include
 
 urlpatterns = [
     path('', include('landingPage.urls')),
+    path('admin/', include('admin.urls'), name='admin'),
     path('coop_virtual/', include('coopVirtual.urls'), name='coop_virtual'),
 ]

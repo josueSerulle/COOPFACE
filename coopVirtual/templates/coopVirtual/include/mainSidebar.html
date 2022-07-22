@@ -10,7 +10,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{% static 'coopVirtual/dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
+                <img src="{% static 'coopVirtual/dist/img/avatar5.png' %}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="{% url "profile" %}" class="d-block">{{ user.persona.nombre }} {{ user.persona.apellidos }}</a>
@@ -42,12 +42,12 @@
                                 <p>Calculadora de prestamo</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {% comment %} <li class="nav-item">
                             <a href="../layout/top-nav-sidebar.html" class="nav-link">
                                 <i class="nav-icon fas fa-lock"></i>
                                 <p>Prestamos</p>
                             </a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -73,12 +73,12 @@
                                 <p>Actualizar mis datos</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {% comment %} <li class="nav-item">
                             <a href="../layout/top-nav-sidebar.html" class="nav-link">
                                 <i class="nav-icon fas fa-lock"></i>
                                 <p>Cambio de Contraseña</p>
                             </a>
-                        </li>
+                        </li> {% endcomment %}
                     </ul>
                 </li>
             </ul>

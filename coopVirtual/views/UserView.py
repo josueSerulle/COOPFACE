@@ -8,7 +8,7 @@ from django.contrib import messages
 
 # Create your views here.
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def editView(request):
     user            = UserBackEnd()
@@ -18,7 +18,7 @@ def editView(request):
     
     return render(request, "coopVirtual/users/edit.html", {"person" : person, "job" : personJob, "address" : personAddress})
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def updateView(request):
     user = UserBackEnd()

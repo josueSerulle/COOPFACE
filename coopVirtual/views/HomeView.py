@@ -4,8 +4,7 @@ from ..decorators import partner_required
 
 # Create your views here.
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def index(request):
-    print(request.user.persona.imagen)
-    return render(request, "coopVirtual/home.html");
+    return render(request, "coopVirtual/home.html")

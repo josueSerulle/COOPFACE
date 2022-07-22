@@ -29,7 +29,7 @@
                     {% if error %}
                         <div class="alert alert-danger text-center" role="alert">{{ error }}</div>
                     {% endif %}
-                    <form id="login-form" action="{% url "login" %}" method="post">
+                    <form id="login-form" action="{% url "login_coop" %}" method="post">
                         {% csrf_token %}
                         <div class="input-group mb-3">
                             <input type="text" name="username" class="form-control" placeholder="codigo" required>

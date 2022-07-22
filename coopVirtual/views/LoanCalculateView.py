@@ -8,14 +8,13 @@ from django.http import JsonResponse
 
 # Create your views here.
 
-@login_required(login_url='login')
+@login_required(login_url='login_coop')
 @partner_required
 def indexView(request):
     LoanApplication = LoandApplicationBackEnd()
-    return render(request, "coopVirtual/loanCalculate/index.html", {"loandTypes": LoanApplication.getLoandType()})
+    return render(request, "coopVirtual/loanCalculate/index.html", {"loandTypes": LoanApplication.getAllLoandType()})
 
-@login_required(login_url='login')
-@partner_required
+@login_required(login_url='login_coop')
 def loandCalculateView(request):
     
     if request.method == "GET":
