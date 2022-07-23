@@ -898,8 +898,8 @@ Banner Style
   position: absolute;
   right: 0;
   top: 100px;
-  width: 819px;
-  height: 674px;
+  width: 976px;
+  height: 781px;
 }
 
 .main-banner .item {
@@ -1382,7 +1382,7 @@ Pricing
   display: block;
   font-size: 15px;
   color: #7a7a7a;
-  margin-bottom: 20px;
+  margin-bottom: 9px;
 }
 
 .pricing-tables .item .main-blue-button {
@@ -2034,4 +2034,13 @@ responsive
   .contact-us .info span {
     margin-bottom: 20px;
   }
+}
+
+/*****************************************************************
+                Custom
+*****************************************************************/
+.about .item .icon {
+  width: 45px;
+  height: 45px;
+  margin: 0 auto;
 }
